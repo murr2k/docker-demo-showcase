@@ -46,9 +46,19 @@ You have two options for Docker Hub authentication:
 - They're specifically for automated systems
 
 #### Fly.io API Token
-1. Install Fly CLI if not already installed
-2. Run: `fly auth token`
-3. Copy the token and save it as `FLY_API_TOKEN` in GitHub
+1. Install Fly CLI if not already installed:
+   ```bash
+   curl -L https://fly.io/install.sh | sh
+   ```
+2. Log in to Fly.io:
+   ```bash
+   fly auth login
+   ```
+3. Get your API token:
+   ```bash
+   fly auth token
+   ```
+4. Copy the token and save it as `FLY_API_TOKEN` in GitHub Secrets
 
 ## Manual Deployment
 
