@@ -70,6 +70,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Check Fly.io Token
+        run: |
+          if [ -z "${{ secrets.FLY_API_TOKEN }}" ]; then
+            echo "::error::FLY_API_TOKEN secret is not set. Please add it to your repository secrets."
+            echo "To get your Fly.io token, run: fly auth token"
+            exit 1
+          fi
+      
       - name: Setup Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
       
