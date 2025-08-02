@@ -36,7 +36,7 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="bg-gray-800 text-white py-4">
         <div className="container mx-auto px-4 text-center">
           <p>Built with Docker, Next.js, and deployed on Fly.io</p>
-          <p className="text-sm text-gray-400 mt-1">By murr2k</p>
+          <p className="text-sm text-gray-400 mt-1">By MUrray Kopit</p>
         </div>
       </footer>
     </div>
