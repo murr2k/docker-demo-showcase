@@ -70,20 +70,21 @@ jobs:
       - name: Setup Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
       
+      - name: Wait for Docker Hub image
+        run: |
+          echo "Waiting for Docker image to be available on Docker Hub..."
+          for i in {1..30}; do
+            if docker pull murr2k/docker-demo-showcase:latest > /dev/null 2>&1; then
+              echo "✅ Image is available on Docker Hub"
+              break
+            fi
+            echo "Waiting... ($i/30)"
+            sleep 2
+          done
+      
       - name: Deploy to Fly.io
         run: |
-          if [ -n "$FLY_API_TOKEN" ]; then
-            echo "FLY_API_TOKEN is set (first 10 chars: ${FLY_API_TOKEN:0:10}...)"
-          else
-            echo "FLY_API_TOKEN is NOT set"
-          fi
-          
-          # Check if app exists, if not create it
-          if ! flyctl apps list | grep -q "docker-demo-showcase"; then
-            echo "App doesn't exist, creating it..."
-            flyctl apps create docker-demo-showcase --org personal || true
-          fi
-          
-          flyctl deploy --remote-only
+          echo "Deploying pre-built image from Docker Hub to Fly.io..."
+          flyctl deploy --image murr2k/docker-demo-showcase:latest
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
