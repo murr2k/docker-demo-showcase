@@ -56,6 +56,8 @@ A comprehensive demonstration of Docker Hub, Docker Build Cloud, and Docker Scou
 
 ## Getting Started
 
+### Local Development
+
 ```bash
 # Install dependencies
 npm install
@@ -70,6 +72,40 @@ npm run build
 npm start
 ```
 
+### Docker Commands
+
+```bash
+# Build Docker image
+npm run docker:build
+
+# Run Docker Scout vulnerability scan
+npm run docker:scout
+
+# Build and push to Docker Hub
+docker build -t murr2k/docker-demo-showcase .
+docker push murr2k/docker-demo-showcase
+```
+
+### Deployment
+
+The app automatically deploys to Fly.io when pushing to the main branch via GitHub Actions.
+
+Manual deployment:
+```bash
+fly deploy --image murr2k/docker-demo-showcase:latest
+```
+
+## CI/CD Pipeline
+
+- **GitHub Actions**: Automated testing, building, and deployment
+- **Docker Hub**: Container registry for built images
+- **Fly.io**: Production hosting platform
+- **Docker Scout**: Automated vulnerability scanning in CI
+
+## Documentation
+
+- [Deployment Guide](docs/DEPLOYMENT.md) - Detailed deployment instructions and secret configuration
+
 ## Author
 
-murr2k
+**murr2k** - [GitHub](https://github.com/murr2k) | [Docker Hub](https://hub.docker.com/u/murr2k)
