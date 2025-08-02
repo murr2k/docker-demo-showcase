@@ -62,7 +62,11 @@ You have two options for Docker Hub authentication:
    ```bash
    fly auth token
    ```
-4. Copy the token and save it as `FLY_API_TOKEN` in GitHub Secrets
+4. **IMPORTANT**: The token must include the `FlyV1 ` prefix
+   - ✅ Correct format: `FlyV1 fm2_lJPEC...`
+   - ❌ Wrong format: `fm2_lJPEC...` (missing prefix)
+   - If your token doesn't have the prefix, add `FlyV1 ` at the beginning
+5. Copy the complete token (with prefix) and save it as `FLY_API_TOKEN` in GitHub Secrets
 
 ## Manual Deployment
 
