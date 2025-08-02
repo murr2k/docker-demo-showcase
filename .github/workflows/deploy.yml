@@ -42,18 +42,20 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKER_USERNAME || 'murr2k' }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        continue-on-error: true
       
-      - name: Build Docker image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: murr2k/docker-demo-showcase:${{ github.sha }}
+          tags: |
+            murr2k/docker-demo-showcase:latest
+            murr2k/docker-demo-showcase:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
       
       - name: Docker Scout CVEs
         uses: docker/scout-action@v1
