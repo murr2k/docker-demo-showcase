@@ -33,6 +33,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Check Docker authentication
+        id: docker-auth
+        run: |
+          if docker login 2>&1 | grep -q "Login Succeeded"; then
+            echo "auth_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "auth_exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
       - name: Run Docker Scout
         uses: docker/scout-action@v1
         with:
