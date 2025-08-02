@@ -77,6 +77,13 @@ jobs:
           else
             echo "FLY_API_TOKEN is NOT set"
           fi
+          
+          # Check if app exists, if not create it
+          if ! flyctl apps list | grep -q "docker-demo-showcase"; then
+            echo "App doesn't exist, creating it..."
+            flyctl apps create docker-demo-showcase --org personal || true
+          fi
+          
           flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
