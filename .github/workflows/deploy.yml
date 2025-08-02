@@ -86,13 +86,20 @@ jobs:
         run: |
           echo "Deploying pre-built image from Docker Hub to Fly.io..."
           
-          # Check if app exists, create if it doesn't
-          if ! flyctl apps list | grep -q "^docker-demo-showcase"; then
-            echo "Creating Fly.io app..."
-            flyctl apps create docker-demo-showcase --org personal || echo "App might already exist"
+          # Debug token (show length and first/last chars)
+          if [ -n "$FLY_API_TOKEN" ]; then
+            TOKEN_LENGTH=${#FLY_API_TOKEN}
+            echo "Token length: $TOKEN_LENGTH"
+            echo "Token starts with: ${FLY_API_TOKEN:0:15}..."
+            echo "Token ends with: ...${FLY_API_TOKEN: -10}"
+            
+            # Check for newlines
+            if echo "$FLY_API_TOKEN" | grep -q $'\n'; then
+              echo "WARNING: Token contains newlines!"
+            fi
           fi
           
-          # Deploy using Docker Hub image
-          flyctl deploy --app docker-demo-showcase --image murr2k/docker-demo-showcase:latest
+          # Try to deploy directly with the image
+          flyctl deploy --app docker-demo-showcase --image murr2k/docker-demo-showcase:latest --yes
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
