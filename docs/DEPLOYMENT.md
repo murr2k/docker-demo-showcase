@@ -54,7 +54,11 @@ You have two options for Docker Hub authentication:
    ```bash
    fly auth login
    ```
-3. Get your API token:
+3. Get your API token (use the newer command):
+   ```bash
+   fly tokens create deploy
+   ```
+   Or use the deprecated command:
    ```bash
    fly auth token
    ```
