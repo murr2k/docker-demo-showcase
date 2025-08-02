@@ -1,34 +1,38 @@
-# fly.toml app configuration file
-app = "docker-demo-showcase"
-primary_region = "sjc"
+# fly.toml app configuration file generated for docker-demo-showcase on 2025-08-02T10:55:53-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'docker-demo-showcase'
+primary_region = 'sjc'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [deploy]
-  strategy = "rolling"
+  strategy = 'rolling'
 
 [env]
-  PORT = "3000"
-  NODE_ENV = "production"
-  DOCKER_HUB_USERNAME = "murr2k"
+  DOCKER_HUB_USERNAME = 'murr2k'
+  NODE_ENV = 'production'
+  PORT = '3000'
 
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 1
-  processes = ["app"]
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 512
+  processes = ['app']
 
 [checks]
   [checks.alive]
-    type = "tcp"
-    interval = "15s"
-    timeout = "2s"
-    grace_period = "5s"
+    type = 'tcp'
+    interval = '15s'
+    timeout = '2s'
+    grace_period = '5s'
+
+[[vm]]
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512
