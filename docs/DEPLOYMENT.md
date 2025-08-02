@@ -66,7 +66,12 @@ You have two options for Docker Hub authentication:
    - ✅ Correct format: `FlyV1 fm2_lJPEC...`
    - ❌ Wrong format: `fm2_lJPEC...` (missing prefix)
    - If your token doesn't have the prefix, add `FlyV1 ` at the beginning
-5. Copy the complete token (with prefix) and save it as `FLY_API_TOKEN` in GitHub Secrets
+5. **CRITICAL**: When copying the token:
+   - The token might be displayed on multiple lines
+   - You must copy it as **ONE CONTINUOUS STRING** without any newlines
+   - If you see commas in the token display, remove them
+   - The final token should be one long string starting with `FlyV1 fm2_`
+6. Copy the complete token (with prefix, no newlines) and save it as `FLY_API_TOKEN` in GitHub Secrets
 
 ## Manual Deployment
 
