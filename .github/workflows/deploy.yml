@@ -69,11 +69,15 @@ jobs:
       
       - name: Check Fly.io Token
         run: |
-          if [ -z "${{ secrets.FLY_API_TOKEN }}" ]; then
+          if [ -z "$FLY_API_TOKEN" ]; then
             echo "::error::FLY_API_TOKEN secret is not set. Please add it to your repository secrets."
             echo "To get your Fly.io token, run: fly auth token"
             exit 1
+          else
+            echo "FLY_API_TOKEN is set (length: ${#FLY_API_TOKEN})"
           fi
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       
       - name: Setup Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
