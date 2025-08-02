@@ -6,9 +6,14 @@ To enable the CI/CD pipeline, you need to configure the following secrets in you
 
 ### Required Secrets
 
+⚠️ **Important**: The GitHub Actions workflow will fail without these secrets properly configured.
+
 1. **DOCKER_USERNAME** - Your Docker Hub username (e.g., `murr2k`)
-2. **DOCKER_HUB_TOKEN** - Your Docker Hub Personal Access Token (PAT)
+   - Optional: If not set, defaults to `murr2k`
+2. **DOCKER_HUB_TOKEN** - Your Docker Hub password or Personal Access Token (PAT)
+   - **Required**: Without this, Docker push will fail with 401 Unauthorized
 3. **FLY_API_TOKEN** - Your Fly.io API token
+   - **Required**: For deployment to Fly.io
 
 ### How to Add Secrets
 
