@@ -55,7 +55,6 @@ jobs:
             murr2k/docker-demo-showcase:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: linux/amd64,linux/arm64
       
       - name: Docker Scout CVEs
         uses: docker/scout-action@v1
