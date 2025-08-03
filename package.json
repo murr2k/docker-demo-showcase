@@ -1,6 +1,6 @@
 {
   "name": "docker-demo-showcase",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Docker features demo showcasing Docker Hub, Build Cloud, and Scout",
   "main": "index.js",
   "scripts": {
