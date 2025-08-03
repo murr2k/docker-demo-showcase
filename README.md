@@ -1,14 +1,31 @@
-# Docker Features Demo Showcase
+# Docker Demo Showcase v2.0
 
-A comprehensive demonstration of Docker Hub, Docker Build Cloud, and Docker Scout features.
+A comprehensive, interactive demonstration of the Docker ecosystem featuring stunning visualizations, real-time metrics, and immersive experiences. Built with Next.js and deployed on Fly.io.
 
-🚀 **Live Demo**: https://docker-demo-showcase.fly.dev/
+🚀 **Live Demo**: https://docker.linknode.com
+
+🎉 **v2.0.0 Now Live!** Experience the complete Docker ecosystem with interactive demos, animations, and audio narration.
 
 ## Features
 
+### Core Docker Services (v1.0)
 - **Docker Hub Integration**: Repository management and image distribution
 - **Docker Build Cloud**: Accelerated builds with multi-architecture support
 - **Docker Scout**: Real-time vulnerability scanning and SBOM generation
+
+### New in v2.0 🆕
+- **🎼 Docker Compose**: Interactive YAML playground with service visualization
+- **🐝 Docker Swarm**: Cluster management with real-time node monitoring
+- **💻 Docker Desktop**: Simulated desktop experience showcase
+- **🧩 Extensions**: Marketplace demo with installation simulation
+- **📦 Registry**: Private registry management interface
+- **📊 Metrics Dashboard**: Real-time Grafana-style visualizations
+
+### Experience Enhancements
+- **🎨 Modern UI/UX**: Glassmorphism, particle effects, smooth animations
+- **🎵 Audio System**: Background music and voice narration
+- **✨ Interactive**: Hover effects, real-time updates, dynamic content
+- **🌙 Dark Theme**: Optimized for developer experience
 
 ## Tech Stack
 
