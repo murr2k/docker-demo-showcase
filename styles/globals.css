@@ -6,6 +6,10 @@
   body {
     @apply bg-gray-50 text-gray-900;
   }
+  
+  body.v2-theme {
+    @apply bg-black text-white;
+  }
 }
 
 @layer components {
@@ -20,4 +24,11 @@
   .btn-primary {
     @apply bg-docker-blue text-white px-4 py-2 rounded-md hover:bg-docker-darkblue transition-colors;
   }
+}
+
+/* V2 Theme Variables */
+body.v2-theme {
+  --docker-blue: #2496ed;
+  --docker-darkblue: #1d7fc7;
+  --docker-lightblue: #4ba9f5;
 }
