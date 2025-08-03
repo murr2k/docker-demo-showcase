@@ -9,19 +9,23 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
   const [volume, setVolume] = useState(0.3)
   const [isNarrating, setIsNarrating] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const clickRef = useRef<HTMLAudioElement>(null) 
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null)
 
   useEffect(() => {
-    // Initialize theme music
     if (audioRef.current) {
       audioRef.current.volume = volume
       audioRef.current.loop = true
-      
+
       if (autoPlay) {
         audioRef.current.play().catch(err => {
           console.log('Autoplay prevented:', err)
         })
       }
+    }
+
+    if (clickRef.current) {
+      clickRef.current.volume = 0.5 // Adjust click volume if needed
     }
   }, [autoPlay, volume])
 
@@ -34,24 +38,29 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
       audioRef.current.play()
     }
     setIsPlaying(!isPlaying)
+
+    clickRef.current?.play()
   }
 
   const narrate = (text: string) => {
     if ('speechSynthesis' in window) {
-      // Cancel any ongoing narration
       window.speechSynthesis.cancel()
-      
+
       const utterance = new SpeechSynthesisUtterance(text)
-      utterance.voice = window.speechSynthesis.getVoices().find(voice => 
-        voice.name.includes('Google') || voice.name.includes('Microsoft')
-      ) || null
+      utterance.voice =
+        window.speechSynthesis
+          .getVoices()
+          .find(
+            voice =>
+              voice.name.includes('Google') || voice.name.includes('Microsoft')
+          ) || null
       utterance.rate = 0.9
       utterance.pitch = 1
       utterance.volume = 0.8
-      
+
       utterance.onstart = () => setIsNarrating(true)
       utterance.onend = () => setIsNarrating(false)
-      
+
       synthRef.current = utterance
       window.speechSynthesis.speak(utterance)
     }
@@ -60,16 +69,14 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
   const stopNarration = () => {
     window.speechSynthesis.cancel()
     setIsNarrating(false)
+
   }
 
   return (
     <>
-      <audio
-        ref={audioRef}
-        src="/audio/docker-theme.mp3"
-        preload="auto"
-      />
-      
+      <audio ref={audioRef} src="/audio/docker-theme.mp3" preload="auto" />
+      <audio ref={clickRef} src="/audio/click.mp3" preload="auto" /> 
+
       <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
         {/* Music Controls */}
         <div className="glass-card p-4 flex items-center gap-4">
@@ -80,18 +87,18 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
           >
             {isPlaying ? '⏸️' : '▶️'}
           </button>
-          
+
           <input
             type="range"
             min="0"
             max="1"
             step="0.1"
             value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            onChange={e => setVolume(parseFloat(e.target.value))}
             className="w-24"
             title="Volume"
           />
-          
+
           <span className="text-white text-sm">🎵</span>
         </div>
 
@@ -102,15 +109,19 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
               if (isNarrating) {
                 stopNarration()
               } else {
-                narrate('Welcome to Docker Demo Showcase version 2.0. Experience the power of containerization with interactive demos, real-time metrics, and comprehensive ecosystem exploration.')
+                narrate(
+                  'Welcome to Docker Demo Showcase version 2.0. Experience the power of containerization with interactive demos, real-time metrics, and comprehensive ecosystem exploration.'
+                )
               }
+
+              clickRef.current?.play()
             }}
             className="btn-primary-v2 rounded-full w-12 h-12 flex items-center justify-center"
             title={isNarrating ? 'Stop Narration' : 'Start Narration'}
           >
             {isNarrating ? '🔇' : '🔊'}
           </button>
-          
+
           <span className="text-white text-sm">
             {isNarrating ? 'Narrating...' : 'Narration'}
           </span>
@@ -118,14 +129,16 @@ export default function AudioSystem({ autoPlay = false }: AudioSystemProps) {
       </div>
 
       {/* Global narration helper */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
           window.narrateSection = function(text) {
             const event = new CustomEvent('narrate', { detail: { text } });
             window.dispatchEvent(event);
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </>
   )
 }
@@ -135,7 +148,7 @@ export function useNarration() {
   const narrate = (text: string) => {
     window.dispatchEvent(new CustomEvent('narrate', { detail: { text } }))
   }
-  
+
   useEffect(() => {
     const handleNarrate = (e: CustomEvent) => {
       if ('speechSynthesis' in window && e.detail?.text) {
@@ -143,10 +156,11 @@ export function useNarration() {
         window.speechSynthesis.speak(utterance)
       }
     }
-    
+
     window.addEventListener('narrate', handleNarrate as EventListener)
-    return () => window.removeEventListener('narrate', handleNarrate as EventListener)
+    return () =>
+      window.removeEventListener('narrate', handleNarrate as EventListener)
   }, [])
-  
+
   return { narrate }
 }
