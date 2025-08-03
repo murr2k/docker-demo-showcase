@@ -65,10 +65,20 @@ A comprehensive, interactive demonstration of the Docker ecosystem featuring stu
 
 ## Pages Structure
 
-- `/` - Home page with overview
+### v1.0 Pages (Classic)
+- `/index-v1` - Original home page
 - `/docker-hub` - Docker Hub features demo
 - `/build-cloud` - Build Cloud acceleration demo
 - `/scout` - Scout vulnerability scanning demo
+
+### v2.0 Pages (New)
+- `/` - Interactive home with particle effects
+- `/compose` - Docker Compose playground
+- `/swarm` - Swarm cluster visualization
+- `/desktop` - Docker Desktop showcase
+- `/extensions` - Extensions marketplace
+- `/registry` - Registry management
+- `/metrics` - Real-time metrics dashboard
 - `/api/*` - Backend API routes
 
 ## Getting Started
