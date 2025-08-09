@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import ParticleBackground from '../components/v2/ParticleBackground'
+import CanvasParticleBackground from '../components/v2/CanvasParticleBackground'
 import { useNarration } from '../components/v2/AudioSystem'
 
 export default function DockerRegistry() {
@@ -48,7 +48,7 @@ export default function DockerRegistry() {
         <link rel="stylesheet" href="/styles/v2/design-system.css" />
       </Head>
 
-      <ParticleBackground />
+      <CanvasParticleBackground />
 
       <div className="min-h-screen relative z-10 py-20 px-4">
         <div className="max-w-7xl mx-auto">

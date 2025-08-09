@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import ParticleBackground from '../components/v2/ParticleBackground'
+import CanvasParticleBackground from '../components/v2/CanvasParticleBackground'
 import AudioSystem, { useNarration } from '../components/v2/AudioSystem'
 
 export default function HomeV2() {
@@ -97,7 +97,7 @@ export default function HomeV2() {
 
       {mounted && (
         <>
-          <ParticleBackground />
+          <CanvasParticleBackground />
           <AudioSystem autoPlay={false} />
         </>
       )}

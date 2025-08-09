@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-09T20:29:59.812Z",
+  "particlesFound": true,
+  "canvasCount": 1,
+  "performance": {
+    "fps": 46,
+    "memory": {
+      "usedJSHeapSize": 90.2532787322998,
+      "totalJSHeapSize": 112.58403968811035
+    },
+    "duration": 1012.3000000119209
+  },
+  "screenshotsTaken": [
+    "01-initial-load.png",
+    "02-before-mouse.png",
+    "03-mouse-center.png",
+    "04-after-circle.png",
+    "05-after-clicks.png"
+  ]
+}

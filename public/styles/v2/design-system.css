@@ -1,0 +1,98 @@
+/* Docker Demo Showcase v2 Design System */
+
+/* Glass Card Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Glow Text Effect */
+.glow-text {
+  text-shadow: 
+    0 0 10px rgba(36, 150, 237, 0.8),
+    0 0 20px rgba(36, 150, 237, 0.6),
+    0 0 30px rgba(36, 150, 237, 0.4);
+}
+
+/* Button Styles */
+.btn-primary-v2 {
+  background: linear-gradient(135deg, #2496ed 0%, #4ba9f5 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary-v2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(36, 150, 237, 0.3);
+}
+
+.btn-v2 {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+}
+
+/* Heading Styles */
+.heading-v2 {
+  background: linear-gradient(135deg, #2496ed 0%, #7c3aed 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Docker Loader */
+.loader-docker {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
