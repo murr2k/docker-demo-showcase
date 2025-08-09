@@ -36,7 +36,7 @@ jobs:
           PLAYWRIGHT_BASE_URL: http://localhost:3000
       
       - name: Upload Playwright report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
@@ -44,7 +44,7 @@ jobs:
           retention-days: 30
       
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results
