@@ -1,0 +1,92 @@
+name: Audit CI Environment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/audit-environment.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: System Information
+        run: |
+          echo "=== OS Information ==="
+          cat /etc/os-release
+          echo ""
+          echo "=== Node.js Version ==="
+          node --version
+          echo ""
+          echo "=== NPM Version ==="
+          npm --version
+          echo ""
+          echo "=== Available Memory ==="
+          free -h
+          echo ""
+          echo "=== CPU Info ==="
+          lscpu | head -20
+      
+      - name: Check Pre-installed Software
+        run: |
+          echo "=== Docker Version ==="
+          docker --version || echo "Docker not found"
+          echo ""
+          echo "=== Git Version ==="
+          git --version
+          echo ""
+          echo "=== Python Version ==="
+          python3 --version || echo "Python3 not found"
+          echo ""
+          echo "=== Chrome/Chromium ==="
+          google-chrome --version || chromium --version || echo "Chrome/Chromium not found"
+          echo ""
+          echo "=== Firefox ==="
+          firefox --version || echo "Firefox not found"
+          echo ""
+          echo "=== Playwright Browsers ==="
+          npx playwright --version || echo "Playwright not installed"
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Check Installed Packages
+        run: |
+          echo "=== Package.json Dependencies ==="
+          npm list --depth=0
+          echo ""
+          echo "=== Global NPM Packages ==="
+          npm list -g --depth=0
+      
+      - name: Playwright Info
+        run: |
+          echo "=== Playwright Installation ==="
+          npx playwright install --help
+          echo ""
+          echo "=== Browsers Needed for Tests ==="
+          npx playwright install --dry-run
+          echo ""
+          echo "=== Current Playwright Browsers ==="
+          npx playwright --version
+      
+      - name: Test Environment Variables
+        run: |
+          echo "=== GitHub Environment Variables ==="
+          echo "GITHUB_ACTIONS: $GITHUB_ACTIONS"
+          echo "CI: $CI"
+          echo "RUNNER_OS: $RUNNER_OS"
+          echo "RUNNER_ARCH: $RUNNER_ARCH"
+          echo "NODE_ENV: $NODE_ENV"
+          echo ""
+          echo "=== Path ==="
+          echo $PATH
